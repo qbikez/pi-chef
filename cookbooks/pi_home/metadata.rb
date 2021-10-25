@@ -1,0 +1,10 @@
+name 'pi_home'
+description 'An example cookbook'
+maintainer 'Example maintainer'
+maintainer_email 'maintainer@example.com'
+license 'Apache-2.0'
+version '1.0.0'
+
+depends 'docker_compose', '~> 0.0'
+depends 'vsts_agent', '~> 3.2'
+depends 'docker', '~> 9.10.0'

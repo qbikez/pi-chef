@@ -1,0 +1,20 @@
+DEPENDENCIES
+  pi-home
+    path: .
+    metadata: true
+
+GRAPH
+  ark (6.0.3)
+    seven_zip (>= 3.1)
+  docker (9.10.0)
+  docker_compose (0.1.1)
+  pi-home (1.0.0)
+    docker (~> 9.10.0)
+    docker_compose (~> 0.0)
+    vsts_agent (~> 3.2)
+  seven_zip (4.2.2)
+  vsts_agent (3.2.0)
+    ark (>= 0.0.0)
+    seven_zip (>= 2.0.0)
+    windows (>= 0.0.0)
+  windows (7.0.2)
