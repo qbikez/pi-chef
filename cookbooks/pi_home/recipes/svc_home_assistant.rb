@@ -29,15 +29,18 @@ script 'git_pull' do
 
     if [ $LOCAL = $REMOTE ]; then
         echo "Up-to-date"
+        exit 1
     elif [ $LOCAL = $BASE ]; then
         echo "Need to pull"
         exit 0
     elif [ $REMOTE = $BASE ]; then
         echo "Need to push"
+        exit 1
     else
         echo "Diverged"
+        exit 0
     fi
-    exit 1
+    
   EOH
   notifies :restart, 'docker_compose_application[homeassistant2]', :delayed
 end
