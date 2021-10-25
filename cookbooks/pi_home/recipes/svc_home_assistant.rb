@@ -1,7 +1,7 @@
 include_recipe '::gitconfig'
 include_recipe '::docker'
 
-git '/home/pi/docker/homeassistant2' do
+git "#{node['home_assistant']['directory']}" do
   repository node['home_assistant']['repo']
   revision 'main'
   action :checkout
@@ -9,7 +9,7 @@ git '/home/pi/docker/homeassistant2' do
   user 'pi'
   group 'pi'
 
-  notifies :restart, 'docker_compose_application[homeassistant2]', :delayed
+  notifies :restart, 'docker_compose_application[home_assistant]', :delayed
 end
 
 script 'git_pull' do
@@ -47,7 +47,7 @@ script 'git_pull' do
   # flags '-l'
   # environment 'HOME' => '/home/pi'
 
-  notifies :restart, 'docker_compose_application[homeassistant2]', :delayed
+  notifies :restart, 'docker_compose_application[home_assistant]', :delayed
 end
 
 script 'git_commit' do
@@ -105,7 +105,7 @@ script 'git_push' do
   # environment 'HOME' => '/home/pi'
 end
 
-docker_compose_application 'homeassistant2' do
+docker_compose_application 'home_assistant' do
   action :up
   compose_files [ "#{node['home_assistant']['directory']}/docker-compose.yml" ]
   user 'pi'
