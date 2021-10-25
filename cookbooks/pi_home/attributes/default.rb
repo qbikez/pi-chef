@@ -12,3 +12,4 @@ default['tailscale']['authkey'] = ''
 
 default['home_assistant']['directory'] = '/home/pi/services/homeassistant'
 default['home_assistant']['repo'] = 'https://github.com/qbikez/home_assistant_stub.git'
+default['home_assistant']['auto_push'] = true
