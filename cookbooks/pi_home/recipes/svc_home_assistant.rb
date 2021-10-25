@@ -5,6 +5,7 @@ git '/home/pi/docker/homeassistant2' do
   repository node['home_assistant']['repo']
   revision 'main'
   action :checkout
+  
   user 'pi'
   group 'pi'
 
@@ -40,10 +41,10 @@ script 'git_pull' do
     fi
   EOH
 
-  user 'pi'
-  group 'pi'
-  flags '-l'
-  environment 'HOME' => '/home/pi'
+  # user 'pi'
+  # group 'pi'
+  # flags '-l'
+  # environment 'HOME' => '/home/pi'
 
   notifies :restart, 'docker_compose_application[homeassistant2]', :delayed
 end
@@ -62,10 +63,10 @@ script 'git_sync' do
     [ -n "$(git status --porcelain)" ]
   EOH
 
-  user 'pi'
-  group 'pi'
-  flags '-l'
-  environment 'HOME' => '/home/pi'
+  # user 'pi'
+  # group 'pi'
+  # flags '-l'
+  # environment 'HOME' => '/home/pi'
 end
 
 docker_compose_application 'homeassistant2' do
