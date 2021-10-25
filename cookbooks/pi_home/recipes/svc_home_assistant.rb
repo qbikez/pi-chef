@@ -18,9 +18,9 @@ script 'git_pull' do
   code <<~EOH
     git pull
   EOH
-  only_if <<~EOH
     # https://stackoverflow.com/questions/3258243/check-if-pull-needed-in-git
-
+  only_if <<~EOH
+    set -x 
     UPSTREAM=${1:-'@{u}'}
     LOCAL=$(git rev-parse @)
     REMOTE=$(git rev-parse "$UPSTREAM")
