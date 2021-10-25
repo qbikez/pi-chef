@@ -38,4 +38,4 @@ stages:
             - template: lib/chef-recipe-task.yaml
               parameters:
                 recipe: ${{recipe}}
-                continueOnError: true
+                continueOnError: false
