@@ -1,0 +1,36 @@
+{
+  "name": "seven_zip",
+  "description": "Installs/Configures 7-Zip",
+  "long_description": "",
+  "maintainer": "Sous Chefs",
+  "maintainer_email": "help@sous-chefs.org",
+  "license": "Apache-2.0",
+  "platforms": {
+    "windows": ">= 0.0.0"
+  },
+  "dependencies": {
+
+  },
+  "providing": {
+
+  },
+  "recipes": {
+
+  },
+  "version": "4.2.2",
+  "source_url": "https://github.com/sous-chefs/seven_zip",
+  "issues_url": "https://github.com/sous-chefs/seven_zip/issues",
+  "privacy": false,
+  "chef_versions": [
+    [
+      ">= 15.3"
+    ]
+  ],
+  "ohai_versions": [
+
+  ],
+  "gems": [
+
+  ],
+  "eager_load_libraries": true
+}
