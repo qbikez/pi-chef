@@ -77,7 +77,7 @@ Installs and configures [tailscale](https://tailscale.com/). Obtain [auth key](h
 Installs a [home assistant](https://www.home-assistant.io/) instance, running in a docker image. 
 It needs a git repository with home assistant file structure - configured in `node['home_assistant']['repo']`. 
 By default will use https://github.com/qbikez/home_assistant_stub.git, but it's best to fork this repo so you make adjustments. 
-The checked out files will be located in `/home/pi/services/homeassistant`. The recipe will attempt to sync any changes made in that repository back to git origin. If you configure the pipeline to run this recipe periodically, you will effectively have your HA config backed up. 
+The checked out files will be located in `/home/pi/services/home_assistant`. The recipe will attempt to sync any changes made in that repository back to git origin. If you configure the pipeline to run this recipe periodically, you will effectively have your HA config backed up. 
 
 Note: The default settings exclude home assistant's .db files from the backup. Other config files (`*.yaml`, `.storage`, `custom_components`, etc.) should be enough to recreate HA instance. If you want to include database as well, modify `.gitignore` file and add `*.db` to git.
 
