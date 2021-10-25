@@ -38,4 +38,5 @@ stages:
             - template: lib/chef-recipe-task.yaml
               parameters:
                 recipe: ${{recipe}}
+                logLevel: debug
                 continueOnError: false
