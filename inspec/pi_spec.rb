@@ -47,6 +47,6 @@ control 'openvpn' do
     it { should be_running }
   end
   describe processes('/usr/sbin/openvpn') do
-    its('commands') { should include match(%r{--config /etc/openvpn/qbikez\.lajza\.conf}) }
+    its('commands') { should include match(%r{--config /etc/openvpn/.*\.conf}) }
   end
 end
