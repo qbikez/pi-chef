@@ -1,3 +1,6 @@
+include_recipe '::gitconfig'
+include_recipe '::docker'
+
 git '/home/pi/docker/homeassistant2' do
   repository node['home_assistant']['repo']
   revision 'main'
