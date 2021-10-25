@@ -19,6 +19,7 @@ script 'git_pull' do
   EOH
   user 'pi'
   group 'pi'
+  flags '-l'
   only_if <<~EOH
     # https://stackoverflow.com/questions/3258243/check-if-pull-needed-in-git
 
@@ -40,7 +41,6 @@ script 'git_pull' do
         echo "Diverged"
         exit 0
     fi
-    
   EOH
   notifies :restart, 'docker_compose_application[homeassistant2]', :delayed
 end
@@ -60,6 +60,7 @@ script 'git_sync' do
   EOH
   user 'pi'
   group 'pi'
+  flags '-l'
 end
 
 docker_compose_application 'homeassistant2' do
