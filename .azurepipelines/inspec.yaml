@@ -7,6 +7,13 @@ trigger:
       - .azurepipelines/inspec.yaml
       - inspec/*
 
+schedules:
+  - cron: "0 8,16 * * *"
+    displayName: Daily build
+    branches:
+      include:
+        - main
+
 
 pool: pi
 
