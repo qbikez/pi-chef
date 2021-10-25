@@ -17,9 +17,29 @@ script 'git_pull' do
   code <<~EOH
     git pull
   EOH
-  # user 'pi'
-  # group 'pi'
-end 
+  user 'pi'
+  group 'pi'
+  only_if <<~EOH
+    # https://stackoverflow.com/questions/3258243/check-if-pull-needed-in-git
+
+    UPSTREAM=${1:-'@{u}'}
+    LOCAL=$(git rev-parse @)
+    REMOTE=$(git rev-parse "$UPSTREAM")
+    BASE=$(git merge-base @ "$UPSTREAM")
+
+    if [ $LOCAL = $REMOTE ]; then
+        echo "Up-to-date"
+    elif [ $LOCAL = $BASE ]; then
+        echo "Need to pull"
+        exit 0
+    elif [ $REMOTE = $BASE ]; then
+        echo "Need to push"
+    else
+        echo "Diverged"
+    fi
+    exit 1
+  EOH
+end
 
 script 'git_sync' do
   interpreter 'bash'
@@ -34,8 +54,8 @@ script 'git_sync' do
     git status --porcelain
     [ -n "$(git status --porcelain)" ]
   EOH
-  # user 'pi'
-  # group 'pi'
+  user 'pi'
+  group 'pi'
 end
 
 docker_compose_application 'homeassistant2' do
