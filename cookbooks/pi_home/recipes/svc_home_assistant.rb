@@ -114,7 +114,7 @@ docker_compose_application 'home_assistant' do
   group 'pi'
   # only_if "[ $(docker-compose -f #{compose_files.join(' -f ')} ps -q | wc -l) -eq 0 ]"
   # https://serverfault.com/questions/789601/check-is-container-service-running-with-docker-compose
-  not_if <<~EOH
+  only_if <<~EOH
     set -x
     [ -z `docker-compose -f #{compose_files.join(' -f ')} ps -q` ] || [ -z `docker ps -q --no-trunc | grep $(docker-compose -f #{compose_files.join(' -f ')} ps -q)` ]
   EOH
