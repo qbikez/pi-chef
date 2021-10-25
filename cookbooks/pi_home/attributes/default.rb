@@ -10,5 +10,5 @@ default['vsts_agent']['binary']['url'] = 'https://vstsagentpackage.azureedge.net
 # go to https://login.tailscale.com/admin/settings/authkeys and create an auth key
 default['tailscale']['authkey'] = ''
 
-default['home_assistant']['directory'] = '/home/pi/docker/homeassistant'
+default['home_assistant']['directory'] = '/home/pi/services/homeassistant'
 default['home_assistant']['repo'] = 'https://github.com/qbikez/home_assistant_stub.git'
