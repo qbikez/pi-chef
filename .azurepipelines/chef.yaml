@@ -13,7 +13,7 @@ pool: pi
 
 parameters:
   - name: logLevel
-    default: auto
+    default: info # auto
   - name: recipes
     type: object
     default: 

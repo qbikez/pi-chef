@@ -112,5 +112,7 @@ docker_compose_application 'home_assistant' do
   compose_files [ "#{node['home_assistant']['directory']}/docker-compose.yml" ]
   user 'pi'
   group 'pi'
-  only_if "[ $(docker-compose -f #{compose_files.join(' -f ')} ps -q | wc -l) -eq 0 ]"
+  # only_if "[ $(docker-compose -f #{compose_files.join(' -f ')} ps -q | wc -l) -eq 0 ]"
+  # https://serverfault.com/questions/789601/check-is-container-service-running-with-docker-compose
+  not_if "[ -z `docker-compose -f #{compose_files.join(' -f ')} ps -q` ] || [ -z `docker ps -q --no-trunc | grep $(docker-compose -f #{compose_files.join(' -f ')} ps -q)` ]"
 end
