@@ -39,7 +39,20 @@ action :up do
   execute "running docker-compose up for project #{project_name}" do
     command "docker-compose #{get_compose_params} up #{get_up_params}"
     environment('PATH' => '/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin')
-    # only_if "[ $(docker-compose -f #{compose_files.join(' -f ')} ps -q | wc -l) -eq 0 ]"
+    # https://serverfault.com/questions/789601/check-is-container-service-running-with-docker-compose
+    only_if "[ -z `docker-compose -f #{compose_files.join(' -f ')} ps -q` ] || [ -z `docker ps -q --no-trunc | grep $(docker-compose -f #{compose_files.join(' -f ')} ps -q)` ]"
+    user user
+    group group
+  end
+end
+
+action :up_force do
+  project_name = new_resource.project_name || current_resource.project_name
+  compose_files = new_resource.compose_files || current_resource.compose_files
+
+  execute "running docker-compose up for project #{project_name}" do
+    command "docker-compose #{get_compose_params} up #{get_up_params}"
+    environment('PATH' => '/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin')
     user user
     group group
   end
@@ -71,5 +84,5 @@ end
 
 action :restart do
   action_down
-  action_up
+  action_up_force
 end
