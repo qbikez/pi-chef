@@ -1,6 +1,6 @@
 # Pi Chef
 
-Managing Raspbery Pi(s) with chef.
+Managing Raspbery Pi(s) with chef. [About the project](About.md).
 
 ## Prerequisites
 
@@ -11,7 +11,7 @@ Managing Raspbery Pi(s) with chef.
 Disclaimer: I assume you're using Azure DevOps to host your repository and run pipelines. I haven't tested the flow with other providers (i.e. Github), but I assume the steps would be similar.
 
 1. On raspberry Pi:
-    * install chef-client and friends
+    * [install chef-client and friends](InstallChef.md)
     * fork this repository and clone the fork
 2. create node attributes file (i.e. at `/boot/chef/node.json`):
 
