@@ -22,6 +22,10 @@ script 'git_pull' do
   only_if <<~EOH
     cd #{node['home_assistant']['directory']}
 
+    set -x
+
+    git fetch
+
     UPSTREAM=${1:-'@{u}'}
     LOCAL=$(git rev-parse @)
     REMOTE=$(git rev-parse "$UPSTREAM")
