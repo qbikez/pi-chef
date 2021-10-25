@@ -108,8 +108,9 @@ if node['home_assistant']['auto_push']
 end
 
 docker_compose_application 'home_assistant' do
-  action :nothing # only run on notification
+  action :up
   compose_files [ "#{node['home_assistant']['directory']}/docker-compose.yml" ]
   user 'pi'
   group 'pi'
+  only_if "[ $(docker-compose -f #{compose_files.join(' -f ')} ps -q | wc -l) -eq 0 ]"
 end
