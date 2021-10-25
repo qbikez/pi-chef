@@ -5,11 +5,11 @@ git "#{node['home_assistant']['directory']}" do
   repository node['home_assistant']['repo']
   revision 'main'
   action :checkout
-  
+
   user 'pi'
   group 'pi'
 
-  notifies :restart, 'docker_compose_application[home_assistant]', :delayed
+#  notifies :restart, 'docker_compose_application[home_assistant]', :delayed
 end
 
 script 'git_pull' do
@@ -47,7 +47,7 @@ script 'git_pull' do
   # flags '-l'
   # environment 'HOME' => '/home/pi'
 
-  notifies :restart, 'docker_compose_application[home_assistant]', :delayed
+  notifies :up, 'docker_compose_application[home_assistant]', :delayed
 end
 
 if node['home_assistant']['auto_push']
