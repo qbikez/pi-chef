@@ -9,7 +9,7 @@ git "#{node['home_assistant']['directory']}" do
   user 'pi'
   group 'pi'
 
-#  notifies :restart, 'docker_compose_application[home_assistant]', :delayed
+  notifies :restart, 'docker_compose_application[home_assistant]', :delayed
 end
 
 script 'git_pull' do
@@ -47,7 +47,7 @@ script 'git_pull' do
   # flags '-l'
   # environment 'HOME' => '/home/pi'
 
-  notifies :up, 'docker_compose_application[home_assistant]', :delayed
+  notifies :restart, 'docker_compose_application[home_assistant]', :delayed
 end
 
 if node['home_assistant']['auto_push']
@@ -108,7 +108,7 @@ if node['home_assistant']['auto_push']
 end
 
 docker_compose_application 'home_assistant' do
-  action :up
+  action :nothing # only run on notification
   compose_files [ "#{node['home_assistant']['directory']}/docker-compose.yml" ]
   user 'pi'
   group 'pi'
