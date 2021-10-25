@@ -20,7 +20,8 @@ script 'git_pull' do
   EOH
     # https://stackoverflow.com/questions/3258243/check-if-pull-needed-in-git
   only_if <<~EOH
-    set -x 
+    cd #{node['home_assistant']['directory']}
+    
     UPSTREAM=${1:-'@{u}'}
     LOCAL=$(git rev-parse @)
     REMOTE=$(git rev-parse "$UPSTREAM")
