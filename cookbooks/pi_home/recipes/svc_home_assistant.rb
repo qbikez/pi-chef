@@ -21,7 +21,7 @@ script 'git_pull' do
     # https://stackoverflow.com/questions/3258243/check-if-pull-needed-in-git
   only_if <<~EOH
     cd #{node['home_assistant']['directory']}
-    
+
     UPSTREAM=${1:-'@{u}'}
     LOCAL=$(git rev-parse @)
     REMOTE=$(git rev-parse "$UPSTREAM")
@@ -50,7 +50,7 @@ script 'git_pull' do
   notifies :restart, 'docker_compose_application[homeassistant2]', :delayed
 end
 
-script 'git_sync' do
+script 'git_commit' do
   interpreter 'bash'
   cwd node['home_assistant']['directory']
   code <<~EOH
@@ -62,6 +62,41 @@ script 'git_sync' do
     cd #{node['home_assistant']['directory']}
     git status --porcelain
     [ -n "$(git status --porcelain)" ]
+  EOH
+
+  # user 'pi'
+  # group 'pi'
+  # flags '-l'
+  # environment 'HOME' => '/home/pi'
+end
+
+script 'git_push' do
+  interpreter 'bash'
+  cwd node['home_assistant']['directory']
+  code <<~EOH
+    git push
+  EOH
+  only_if <<~EOH
+    cd #{node['home_assistant']['directory']}
+
+    UPSTREAM=${1:-'@{u}'}
+    LOCAL=$(git rev-parse @)
+    REMOTE=$(git rev-parse "$UPSTREAM")
+    BASE=$(git merge-base @ "$UPSTREAM")
+
+    if [ $LOCAL = $REMOTE ]; then
+        echo "Up-to-date"
+        exit 1
+    elif [ $LOCAL = $BASE ]; then
+        echo "Need to pull"
+        exit 1
+    elif [ $REMOTE = $BASE ]; then
+        echo "Need to push"
+        exit 0
+    else
+        echo "Diverged"
+        exit 0
+    fi
   EOH
 
   # user 'pi'
