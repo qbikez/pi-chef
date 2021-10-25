@@ -12,6 +12,8 @@ trigger:
 pool: pi
 
 parameters:
+  - name: logLevel
+    default: auto
   - name: recipes
     type: object
     default: 
@@ -38,5 +40,5 @@ stages:
             - template: lib/chef-recipe-task.yaml
               parameters:
                 recipe: ${{recipe}}
-                logLevel: debug
+                logLevel: ${{parameters.logLevel}}
                 continueOnError: false
