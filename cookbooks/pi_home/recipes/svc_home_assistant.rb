@@ -39,6 +39,7 @@ script 'git_pull' do
     fi
     exit 1
   EOH
+  notifies :restart, 'docker_compose_application[homeassistant2]', :delayed
 end
 
 script 'git_sync' do
