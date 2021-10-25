@@ -17,9 +17,6 @@ script 'git_pull' do
   code <<~EOH
     git pull
   EOH
-  user 'pi'
-  group 'pi'
-  flags '-l'
   only_if <<~EOH
     # https://stackoverflow.com/questions/3258243/check-if-pull-needed-in-git
 
@@ -42,6 +39,12 @@ script 'git_pull' do
         exit 0
     fi
   EOH
+
+  user 'pi'
+  group 'pi'
+  flags '-l'
+  environment 'HOME' => '/home/pi'
+
   notifies :restart, 'docker_compose_application[homeassistant2]', :delayed
 end
 
@@ -58,9 +61,11 @@ script 'git_sync' do
     git status --porcelain
     [ -n "$(git status --porcelain)" ]
   EOH
+
   user 'pi'
   group 'pi'
   flags '-l'
+  environment 'HOME' => '/home/pi'
 end
 
 docker_compose_application 'homeassistant2' do
