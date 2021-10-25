@@ -1,0 +1,16 @@
+parameters:
+  - name: recipe
+  - name: logLevel
+    default: info
+  - name: continueOnError
+    type: boolean
+    default: false
+
+steps:
+  - script: |
+      # prepare env variables
+      eval "$(rbenv init -)"
+      cd cookbooks
+      rbenv sudo chef-client -z -j /boot/chef/node.json --log_level ${{parameters.logLevel}} --runlist ${{parameters.recipe}} 
+    displayName: run chef ${{parameters.recipe}}
+    continueOnError: ${{parameters.continueOnError}}

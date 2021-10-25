@@ -1,0 +1,23 @@
+trigger: 
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - cookbooks/pi_home/recipes/docker.rb
+      - .azurepipelines/chef-docker.yaml
+
+pool: pi
+
+parameters:
+  - name: recipe
+    default: recipe[pi_home::docker]
+
+stages:
+  - stage: chef
+    jobs:
+      - job:
+        steps:
+          - template: lib/chef-recipe-task.yaml
+            parameters:
+              recipe: ${{parameters.recipe}}

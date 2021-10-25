@@ -1,0 +1,41 @@
+# trigger: none
+
+trigger: 
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - cookbooks/pi_home/recipes/
+      - .azurepipelines/chef.yaml
+
+pool: pi
+
+parameters:
+  - name: recipes
+    type: object
+    default: 
+      # Uou can use `include_recipe` and run every recipe in one go, or run one-by-one by explicitly listing them here.
+      # Running recipes separately gives a better overview of what succeeded/failed at the pipeline level, 
+      # but increases the time needed to run them - each time chef has to run through it's initialization phase again.
+      - recipe[pi_home::default]
+      # - recipe[pi_home::system]
+      # - recipe[pi_home::net_openvpn]
+      # - recipe[pi_home::net_tailscale]
+      # - recipe[pi_home::docker]
+      # - recipe[pi_home::svc_home_assistant]
+      # - recipe[pi_home::services]
+
+
+stages:
+  - stage: chef
+    jobs:
+      - job:
+        # workspace:
+        #   clean: all
+        steps:
+          - ${{each recipe in parameters.recipes}}:
+            - template: lib/chef-recipe-task.yaml
+              parameters:
+                recipe: ${{recipe}}
+                continueOnError: true

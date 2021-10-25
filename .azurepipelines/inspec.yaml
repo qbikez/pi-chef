@@ -1,0 +1,21 @@
+trigger: 
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - .azurepipelines/inspec.yaml
+      - inspec/*
+
+
+pool: pi
+
+stages:
+  - stage: inspec
+    jobs:
+      - job:
+        steps:
+          - script: |
+              # prepare env variables
+              eval "$(rbenv init -)"
+              rbenv sudo inspec exec inspec/pi_spec.rb
