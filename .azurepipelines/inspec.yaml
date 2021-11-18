@@ -14,6 +14,14 @@ schedules:
       include:
         - main
 
+resources:
+  pipelines:
+    - pipeline: chef
+      source: qbikez.pi-chef
+      trigger: true
+        
+      
+
 
 pool: pi
 
