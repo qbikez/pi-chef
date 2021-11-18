@@ -142,14 +142,14 @@ action :install do
     args[:proxyurl] = new_resource.proxy_url || nil
     args[:sslcacert] = new_resource.proxy_sslcacert || nil
 
-    args[:sensitive] = new_resource.sensitive != nil ? new_resource.sensitive : true
-    Chef::Log.info "vsts_agent: new_resource.sensitive=#{new_resource.sensitive} args[sensitive]=#{args[:sensitive]}"
+    sensitive = new_resource.sensitive != nil ? new_resource.sensitive : true
+    Chef::Log.info "vsts_agent: new_resource.sensitive=#{new_resource.sensitive} sensitive=#{sensitive}"
 
     set_auth(args, new_resource)
 
     execute "Configuring agent '#{new_resource.agent_name}'" do
       cwd "#{new_resource.install_dir}/bin"
-      sensitive args[:sensitive] if respond_to?(:sensitive)
+      sensitive sensitive if respond_to?(:sensitive)
       command vsagentexec(args)
       action :run
     end
@@ -279,7 +279,7 @@ action_class do
       execute "Unconfiguring agent '#{resource.agent_name}'" do
           cwd "#{resource.install_dir}/bin"
           command vsagentexec(args)
-          sensitive args[:sensitive] if respond_to?(:sensitive)
+          sensitive sensitive if respond_to?(:sensitive)
           action :run
           only_if { agent_exists?(resource.install_dir) }
       end
