@@ -6,7 +6,7 @@ vsts_agent "#{node['vsts_agent']['name']}" do
   group 'pi'
   path '/usr/local/bin/:/usr/bin:/opt/bin/'
   vsts_url node['vsts_agent']['url']
-  vsts_pool node['vsts_agent']['pi']
+  vsts_pool node['vsts_agent']['pool']
   vsts_token node['vsts_agent']['PAT']
   # deploymentGroup true
   # deploymentGroupName 'raspberry'
