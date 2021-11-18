@@ -17,7 +17,7 @@ parameters:
   - name: recipes
     type: object
     default: 
-      # Uou can use `include_recipe` and run every recipe in one go, or run one-by-one by explicitly listing them here.
+      # You can use `include_recipe` and run every recipe in one go, or run one-by-one by explicitly listing them here.
       # Running recipes separately gives a better overview of what succeeded/failed at the pipeline level, 
       # but increases the time needed to run them - each time chef has to run through it's initialization phase again.
       - recipe[pi_home::default]

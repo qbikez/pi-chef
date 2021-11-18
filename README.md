@@ -13,6 +13,7 @@ Disclaimer: I assume you're using Azure DevOps to host your repository and run p
 1. On raspberry Pi:
     * [Install chef-client and friends](InstallChef.md).
     * Fork this repository and clone the fork.
+  
 2. Create node attributes file (i.e. at `/boot/chef/node.json`):
 
     ```json
@@ -38,7 +39,7 @@ Disclaimer: I assume you're using Azure DevOps to host your repository and run p
 
     [Obtain a Personal Access Token](https://docs.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=preview-page) from Azure DevOps and set it in `node.json` file (`['vsts_agent']['PAT']`).
 
-5. Go to Azure DevOps portal and [create agent pool](https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/pools-queues?view=azure-devops&tabs=yaml%2Cbrowser#creating-agent-pools). The cookbook expects pool named `pi` by default. If you decide to name it differently, put the name in attributes: `['vsts_agent']['pool']`.
+3. Go to Azure DevOps portal and [create agent pool](https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/pools-queues?view=azure-devops&tabs=yaml%2Cbrowser#creating-agent-pools). The cookbook expects pool named `pi` by default. If you decide to name it differently, put the name in attributes: `['vsts_agent']['pool']`.
 4. Run `vsts_agent` recipe to instal Azure DevOps agent.
 
     ```shell
