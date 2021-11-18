@@ -19,9 +19,6 @@ resources:
     - pipeline: chef
       source: qbikez.pi-chef
       trigger: true
-        
-      
-
 
 pool: pi
 
@@ -34,3 +31,4 @@ stages:
               # prepare env variables
               eval "$(rbenv init -)"
               rbenv sudo inspec exec inspec/pi_spec.rb
+            displayName: inspec/pi_spec
