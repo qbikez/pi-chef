@@ -43,7 +43,7 @@ Disclaimer: I assume you're using Azure DevOps to host your repository and run p
 4. Run `vsts_agent` recipe to instal Azure DevOps agent.
 
     ```shell
-    rbenv sudo chef-client -z -j /boot/chef/node.json --runlist vsts_agent
+    rbenv sudo chef-client -z -j /boot/chef/node.json --runlist recipe[pi_home::vsts_agent]
     ```
 
     You should see a new agent coming up in the pool.
