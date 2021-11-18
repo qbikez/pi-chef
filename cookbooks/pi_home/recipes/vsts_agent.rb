@@ -15,6 +15,6 @@ vsts_agent "#{node['vsts_agent']['name']}" do
   version '2.193.1'
 end
 
-vsts_agent 'pi-agent-01' do
+vsts_agent "#{node['vsts_agent']['name']}" do
   action :restart
 end
