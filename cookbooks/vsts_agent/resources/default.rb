@@ -142,7 +142,8 @@ action :install do
     args[:proxyurl] = new_resource.proxy_url || nil
     args[:sslcacert] = new_resource.proxy_sslcacert || nil
 
-    args[:sensitive] = new_resource.sensitive || true
+    args[:sensitive] = new_resource.sensitive if new_resource.sensitive != nil else true
+    Chef::Log.info "'#{current_resource.agent_name}' sensitive=#{args[:sensitive]}"
 
     set_auth(args, new_resource)
 
