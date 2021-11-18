@@ -139,8 +139,8 @@ action :install do
       end
     end
 
-    args[:proxyurl] = new_resource.proxy_url || nil
-    args[:sslcacert] = new_resource.proxy_sslcacert || nil
+    args[:proxyurl] = new_resource.proxy_url if new_resource.proxy_url != nil
+    args[:sslcacert] = new_resource.proxy_sslcacert if new_resource.proxy_sslcacert != nil
 
     sensitive = new_resource.sensitive != nil ? new_resource.sensitive : true
     Chef::Log.info "vsts_agent: new_resource.sensitive=#{new_resource.sensitive} sensitive=#{sensitive}"
