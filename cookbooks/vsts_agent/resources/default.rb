@@ -142,11 +142,13 @@ action :install do
     args[:proxyurl] = new_resource.proxy_url || nil
     args[:sslcacert] = new_resource.proxy_sslcacert || nil
 
+    args[:sensitive] = new_resource.sensitive || true
+
     set_auth(args, new_resource)
 
     execute "Configuring agent '#{new_resource.agent_name}'" do
       cwd "#{new_resource.install_dir}/bin"
-      sensitive true if respond_to?(:sensitive)
+      sensitive args[:sensitive] if respond_to?(:sensitive)
       command vsagentexec(args)
       action :run
     end
@@ -276,7 +278,7 @@ action_class do
       execute "Unconfiguring agent '#{resource.agent_name}'" do
           cwd "#{resource.install_dir}/bin"
           command vsagentexec(args)
-          sensitive true if respond_to?(:sensitive)
+          sensitive args[:sensitive] if respond_to?(:sensitive)
           action :run
           only_if { agent_exists?(resource.install_dir) }
       end
