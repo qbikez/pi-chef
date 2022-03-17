@@ -6,6 +6,7 @@ default['vsts_agent']['name'] = 'pi-agent-01'
 default['vsts_agent']['pool'] = 'pi'
 default['vsts_agent']['url'] = 'https://dev.azure.com/_your_org_name_here'
 default['vsts_agent']['binary']['url'] = 'https://vstsagentpackage.azureedge.net/agent/%s/vsts-agent-linux-arm-%s.tar.gz'
+default['vsts_agent']['version'] = '2.193.1'
 
 # go to https://login.tailscale.com/admin/settings/authkeys and create an auth key
 default['tailscale']['authkey'] = ''

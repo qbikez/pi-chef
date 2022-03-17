@@ -1,3 +1,8 @@
+group 'docker' do
+  append true
+  members ['pi']
+end
+
 include_recipe 'docker_compose::installation'
 
 docker_network 'pinet' do
