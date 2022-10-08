@@ -55,7 +55,10 @@ Disclaimer: I assume you're using Azure DevOps to host your repository and run p
 
 6. Run the new pipeline and set `recipe` parameter to: `recipe[pi_home::hello_pi]`. This is a simple test pipeline to verify everything is working correctly. Hopefully it will :)
 
-    The pipeline uses chef in local mode (`--zero`). You can configure the full-blown chef server if you wish.
+
+The pipeline uses chef in local mode (`--zero`). It downloads cookbooks from the git repository, so there's no need to use `knife`, just commit & push.
+
+You can of course configure the full-blown chef server if you wish.
 
 ## Services
 

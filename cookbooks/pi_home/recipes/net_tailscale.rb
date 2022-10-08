@@ -1,11 +1,12 @@
 # tailscale
 
 apt_repository 'tailscale' do
-    uri        'https://pkgs.tailscale.com/stable/raspbian'
+    uri        'https://pkgs.tailscale.com/stable/raspbian/bullseye.tailscale-keyring.list'
+    key        'https://pkgs.tailscale.com/stable/raspbian/bullseye.noarmor.gpg'
     components ['main']
-  end
+end
   
-  package 'tailscale'
+package 'tailscale'
   
   # script 'tailscale_install' do
   #   interpreter "bash"
@@ -21,14 +22,13 @@ apt_repository 'tailscale' do
   #   not_if 'which tailscale'
   # end
   
-  script 'tailscale_up' do
-    interpreter "bash"
-    # go to https://login.tailscale.com/admin/settings/authkeys and create an auth key, then put it in node attributes
-    code <<-EOH
-      tailscale up --authkey=#{node['tailscale']['authkey']}
-      tailscale ip -4
-    EOH
-  
-    not_if 'tailscale ip'
-  end
-  
+script 'tailscale_up' do
+  interpreter "bash"
+  # go to https://login.tailscale.com/admin/settings/authkeys and create an auth key, then put it in node attributes
+  code <<-EOH
+    tailscale up --authkey=#{node['tailscale']['authkey']}
+    tailscale ip -4
+  EOH
+
+  not_if 'tailscale ip'
+end

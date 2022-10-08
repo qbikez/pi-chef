@@ -6,6 +6,9 @@ Raspbian has ruby 2., but that's too old for chef, whick needs >=2.6.
 We'll use rbenv to install a newer version of ruby.
 
 ```shell
+# exit when any command fails
+set -e
+
 sudo apt install -y rbenv git
 echo 'eval "$(rbenv init -)"' >> .bashrc
 source .bashrc
@@ -28,7 +31,7 @@ rbenv install 3.0.2 -v
 
 # set installed version as the default
 rbenv global 3.0.2
-# verify
+# verify (should be ruby 3.0.2)
 ruby -v
 ```
 
@@ -60,7 +63,7 @@ sudo chmod 0755 /usr/bin/inspec
 chef-client -v
 
 # to run rbenv as superuser, we need rbenv-sudo
-git clone git://github.com/dcarley/rbenv-sudo.git ~/.rbenv/plugins/rbenv-sudo
+git clone https://github.com/dcarley/rbenv-sudo.git ~/.rbenv/plugins/rbenv-sudo
 
 # finally, accept chef license
 rbenv sudo chef-solo --version --chef-license accept
