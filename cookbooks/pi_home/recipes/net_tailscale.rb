@@ -1,7 +1,7 @@
 # tailscale
 
 apt_repository 'tailscale' do
-    uri        'https://pkgs.tailscale.com/stable/raspbian/bullseye.tailscale-keyring.list'
+    uri        'https://pkgs.tailscale.com/stable/raspbian'
     key        'https://pkgs.tailscale.com/stable/raspbian/bullseye.noarmor.gpg'
     components ['main']
 end
