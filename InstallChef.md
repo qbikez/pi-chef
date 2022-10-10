@@ -38,7 +38,7 @@ rbenv install 3.0.2 -v
 
 # set installed version as the default
 rbenv global 3.0.2
-# verify
+# verify (should be ruby 3.0.2)
 ruby -v
 ```
 
