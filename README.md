@@ -20,7 +20,8 @@ Disclaimer: I assume you're using Azure DevOps to host your repository and run p
     {
         "vsts_agent": {
             "PAT": "get PAT from azure portal",
-            "pool": "pi"
+            "pool": "pi",
+            "url": "https://dev.azure.com/_your_organization_",
         },
         "git": {
             "dev.azure.com/myusername": {
@@ -60,6 +61,12 @@ Disclaimer: I assume you're using Azure DevOps to host your repository and run p
 ## Services
 
 Now that you have a pipeline that runs on the raspberry, it's time to configure some services! All the below are pick-and-choose as you wish. You can of course extend them or create your own recipes.
+
+To run a single recipe:
+
+```shell
+    rbenv sudo chef-client -z -j /boot/chef/node.json --runlist recipe[pi_home::vsts_agent]
+```
 
 ### Networking
 
